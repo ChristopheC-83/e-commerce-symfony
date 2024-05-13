@@ -3,10 +3,16 @@
 
 {% block body %}
 
-<div class="container">
+	<div class="container">
 
 		<h1 class="my-4 text-center">Espace Membre</h1>
 
-		
+		<a href="{{path('app_logout')}}"><button class="btn btn-dark">Me Déconnecter</button></a>
+		<br>
+		<br>
+		<br>
+		<a href="{{path('app_logout')}}"><button class="btn btn-info">Modifier mon Mot de Passe</button></a>
+
+
 	</div>
 {% endblock %}

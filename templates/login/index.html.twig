@@ -19,10 +19,12 @@
 			<input class="form-control" type="password" id="password" name="_password">
 
 
-
 			<input type="hidden" name="_target_path" value="{{ path('app_account') }}">
 
 			<button type="submit" class="btn btn-success mt-4 w-100">Me connecter</button>
 		</form>
+			<a href="{{path('app_register')}}">
+				<button type="submit" class="btn btn-primary mt-4 w-100">Vous n'avez pas de compte ? Inscrivez-vous !</button>
+			</a>
 	</div>
 {% endblock %}
