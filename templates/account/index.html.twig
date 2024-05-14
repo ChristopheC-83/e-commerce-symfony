@@ -7,10 +7,14 @@
 
 		<h1 class="my-4 text-center">Espace Membre</h1>
 
-		<div class="d-flex flex-column w-100 w-md-75 w-lg-50 mx-auto gap-3">
-			<a href="{{path('app_logout')}}"><button class="btn btn-dark w-100 ">Me Déconnecter</button></a>
-			
-			<a href="{{path('app_logout')}}"><button class="btn btn-info w-100">Modifier mon Mot de Passe</button></a>
+		<div class="d-flex flex-column w-100 col gap-3">
+			<a href="{{path('app_logout')}}" class="col-12 col-md-9 col-lg-6 mx-auto ">
+				<button class="btn btn-dark w-100">Me Déconnecter</button>
+			</a>
+
+			<a href="{{path('app_account_modify_pwd')}}" class="col-12 col-md-9 col-lg-6 mx-auto ">
+				<button class="btn btn-info w-100">Modifier mon Mot de Passe</button>
+			</a>
 		</div>
 
 
