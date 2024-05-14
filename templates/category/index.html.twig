@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+	<div class="container my-4">
+
+		<h1 class="my-4">Catégories :</h1>
+		<h3>Découvrez nos
+			{{category.products|length}}
+			{{category.name}}
+			:</h3>
+
+		<div class="row w-100 row-gap-3 mx-auto">
+			{% for product in category.products %}
+				<div class="col-12 col-md-6 col-lg-4 col-xl-3">
+					<div class="card h-100">
+						<img src="/uploads/{{product.illustration}}" class="card-img-top" alt="{{product.name}}">
+						<div class="card-body">
+							<h5 class="card-title text-center">{{product.name}}</h5>
+						</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">Prix HT :{{product.price}} €</li>
+							<li class="list-group-item">TVA ({{product.tva}} %) : {{product.mounttva}} €</li>
+							<li class="list-group-item"><b>Prix TTC : {{product.pricewt}} €</b></li>
+						</ul>
+						<div class="card-body">
+							<a href="#" class="card-link">Card link</a>
+							<a href="#" class="card-link">Another link</a>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+
+		</div>
+
+	</div>
+{% endblock %}
