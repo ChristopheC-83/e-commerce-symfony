@@ -9,9 +9,15 @@ Dans controller on crée une variable qui est notre formulaire
 On l'envoie dans len render avec createview()
 On crée le formulaire dans le controller (->add...)
 
+Créer une table 
+symfony console make:entity
+... on remplit...
+symfony console make:migration
+puis on envoie la migration
+symfony console d:m:m
 
-
-
+pour un crud
+symfony console make:admin:crud
 
 
 
