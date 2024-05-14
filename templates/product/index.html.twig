@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+	<div class="container my-4">
+
+		<h1 class="my-4 text-center my-5">{{ product.name }}</h1>
+		<div class="card mb-3 mx-auto" style="max-width: 1000px;">
+			<div class="row g-0">
+				<div class="col-md-6">
+					<img src="/uploads/{{ product.illustration }}" class="img-fluid rounded-start" alt="{{ product.name }}">
+				</div>
+				<div class="col-md-6">
+					<div class="card-body h-100 d-flex flex-column">
+						<i>
+							<small>
+								<a href="{{ path('app_category',{slug:product.category.slug } )}}" class="text-black text-decoration-none">{{ product.category.name  }}</a>
+								>
+								{{ product.name }}</small>
+						</i>
+						<h3 class="card-title  my-4">{{ product.name }}</h3>
+						{# raw supprime les balises html #}
+						<h4 class="card-text mb-4">{{ product.pricewt }}
+							€</h4>
+						<div class="card-text flex-grow-1">
+							<p>{{ product.description|raw }}</p>
+						</div>
+						<div class="align-bottom">
+							<button class="btn btn-primary w-100">Ajouter au panier</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>{% endblock %}

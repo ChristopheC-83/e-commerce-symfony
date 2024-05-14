@@ -13,26 +13,40 @@
 
 		<div class="row w-100 row-gap-3 mx-auto">
 			{% for product in category.products %}
-				<div class="col-12 col-md-6 col-lg-4 col-xl-3">
+				<a href="{{ path('app_product', {slug : product.slug})}}" class="col-12 col-md-6 col-lg-4 col-xl-3 text-decoration-none">
 					<div class="card h-100">
 						<img src="/uploads/{{product.illustration}}" class="card-img-top" alt="{{product.name}}">
 						<div class="card-body">
 							<h5 class="card-title text-center">{{product.name}}</h5>
 						</div>
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item">Prix HT :{{product.price}} €</li>
-							<li class="list-group-item">TVA ({{product.tva}} %) : {{product.mounttva}} €</li>
-							<li class="list-group-item"><b>Prix TTC : {{product.pricewt}} €</b></li>
-						</ul>
-						<div class="card-body">
-							<a href="#" class="card-link">Card link</a>
-							<a href="#" class="card-link">Another link</a>
-						</div>
-					</div>
-				</div>
-			{% endfor %}
+						<ul class="list-group list-group-flush w-100">
+							<li class="list-group-item d-flex justify-content-between">Prix HT :<span>
+									{{product.price}}
+									€
+								</span>
+							</li>
+							<li class="list-group-item d-flex justify-content-between">TVA ({{product.tva}}
+								%) :
+								<span>
+									{{product.mounttva}}
+									€
+								</span>
+							</li>
+							<li class="list-group-item d-flex justify-content-between fw-bold">
+								Prix TTC :
+								<span>
+									{{product.pricewt}}
+									€
+								</span>
 
-		</div>
+							</li>
+						</ul>
+
+					</div>
+				</a>
+			</a>
+		{% endfor %}
 
 	</div>
-{% endblock %}
+
+</div>{% endblock %}
