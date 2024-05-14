@@ -39,21 +39,21 @@
 										Catégories
 									</p>
 									<ul class="dropdown-menu">
-										<li>
-											<a class="dropdown-item" href="#">Action</a>
-										</li>
-										<li>
-											<a class="dropdown-item" href="#">Another action</a>
-										</li>
-										<li>
-											<a class="dropdown-item" href="#">Something else here</a>
-										</li>
+							
+										{% for category in allCategories %}
+											<li>
+												<a class="dropdown-item" href="{{path('app_category', {'slug': category.slug})}}">
+													{{category.name}}
+												</a>
+											</li>
+										{% endfor %}
+										
 									</ul>
 								</div>
 
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="#">Link</a>
+								<a class="nav-link active" href="{{path('app_home')}}admin">Administration</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="#">Link</a>

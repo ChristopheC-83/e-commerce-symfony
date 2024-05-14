@@ -39,6 +39,12 @@ class ProductCrudController extends AbstractCrudController
         //     $folder = 'uploads/images/'.$user_id;
         // }
 
+        // pageName === new si creation et edit si edition => utilie pour image requise seulemetnà la création d'un produit !
+        $required =true;
+        if ($pageName === 'edit') {
+            $required = false;
+        }
+
         return [
             TextField::new('name')->setLabel('Nom')->setHelp('Nom du Produit'),
             SlugField::new('slug')->setLabel('URL')->setTargetFieldName('name')->setHelp('URL du Produit généré automatiquement'),
@@ -49,7 +55,9 @@ class ProductCrudController extends AbstractCrudController
                 ->setUploadDir('public/uploads')
                 ->setBasePath('uploads')
                 ->setBasePath('uploads')
-                ->setHelp('Image du Produit en 600x600 px'),
+                ->setHelp('Image du Produit en 600x600 px')
+                ->setRequired($required)
+                ,
             NumberField::new('price')->setLabel('Prix HT')->setHelp('Prix du Produit hors taxe sans le sigle €'),
             ChoiceField::new('tva')->setLabel('TVA')->setChoices([
                 '5.5%' => '5.5',

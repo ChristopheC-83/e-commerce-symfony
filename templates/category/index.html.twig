@@ -20,23 +20,11 @@
 							<h5 class="card-title text-center">{{product.name}}</h5>
 						</div>
 						<ul class="list-group list-group-flush w-100">
-							<li class="list-group-item d-flex justify-content-between">Prix HT :<span>
-									{{product.price}}
-									€
-								</span>
-							</li>
-							<li class="list-group-item d-flex justify-content-between">TVA ({{product.tva}}
-								%) :
-								<span>
-									{{product.mounttva}}
-									€
-								</span>
-							</li>
+							
 							<li class="list-group-item d-flex justify-content-between fw-bold">
 								Prix TTC :
 								<span>
-									{{product.pricewt}}
-									€
+									{{product.price|price}}
 								</span>
 
 							</li>

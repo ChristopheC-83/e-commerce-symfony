@@ -21,8 +21,11 @@
 						</i>
 						<h3 class="card-title  my-4">{{ product.name }}</h3>
 						{# raw supprime les balises html #}
-						<h4 class="card-text mb-4">{{ product.pricewt }}
-							€</h4>
+						<h4 class="card-text mb-4">{{ product.pricewt|price }}</h4>
+						<h6>Prix HT :
+							{{ product.price|price }}</h6>
+						<h6>TVA ({{ product.tva }}%) :
+							{{ product.mounttva|price }}</h6>
 						<div class="card-text flex-grow-1">
 							<p>{{ product.description|raw }}</p>
 						</div>

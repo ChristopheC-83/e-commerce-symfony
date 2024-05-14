@@ -103,13 +103,12 @@ class Product
     public function getMountTva()
     {
 
-        return number_format($this->price * $this->tva / 100, 2, ",", " ");
+        return $this->price * $this->tva / 100;
     }
 
     public function getPriceWt()
     {
-
-        return number_format($this->price * (1 + $this->tva / 100), 2, ",", " ");
+        return $this->price * (1 + $this->tva / 100);
     }
 
     public function getTva(): ?float
