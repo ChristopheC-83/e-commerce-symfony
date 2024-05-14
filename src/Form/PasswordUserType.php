@@ -8,6 +8,9 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 
@@ -16,11 +19,12 @@ class PasswordUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('actualpassword', PasswordType::class, [
+            ->add('actualPassword', PasswordType::class, [
                 'label' => 'Votre mot de passe actuel :',
                 'attr' => [
                     'placeholder' => 'Votre mot de passe actuel'
-                ]
+                ],
+                'mapped' => false,
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
@@ -33,7 +37,7 @@ class PasswordUserType extends AbstractType
                 'first_options' => [
                     'label' => 'Votre nouveau mot de passe :',
                     'attr' => [
-                        'placeholder' => 'Nouvea mot de passe'
+                        'placeholder' => 'Nouveau mot de passe'
                     ],
 
                     'hash_property_path' => 'password'
@@ -53,6 +57,31 @@ class PasswordUserType extends AbstractType
                     'class' => 'btn-success w-100 my-4'
                 ]
             ])
+
+            // A quel moment écoute le formulaire ?
+            // pour faire quoi ?
+            ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
+                // die('mon event fonctionne');
+    
+                //  $event est capable de récupérer un formulaire
+                $form = $event->getForm();
+                $user = $form->getConfig()->getOptions()['data'];
+                $passwordHasher = $form->getConfig()->getOptions()['passwordHasher'];
+
+
+                // 1 recup le mdp saisi & compare au mdp en DB
+                $actualPassword = $form->get('actualPassword')->getData();
+                $isValid = $passwordHasher->isPasswordValid($user, $actualPassword);
+
+                // dd($isValid);
+    
+                // 2 comparer les 2 mdp, si différent, erreur
+                if (!$isValid) {
+                    $form->get('actualPassword')->addError(new FormError('Le mot de passe saisi est incorrect'));
+                }
+
+
+            })
         ;
     }
 
@@ -60,6 +89,7 @@ class PasswordUserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'passwordHasher' => null
         ]);
     }
 }

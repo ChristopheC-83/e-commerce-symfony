@@ -7,6 +7,7 @@ on nomme
 on lie si besoin à une entité 
 Dans controller on crée une variable qui est notre formulaire
 On l'envoie dans len render avec createview()
+On crée le formulaire dans le controller (->add...)
 
 
 
