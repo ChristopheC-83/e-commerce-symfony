@@ -30,8 +30,9 @@
 							<p>{{ product.description|raw }}</p>
 						</div>
 						<div class="align-bottom">
-							<button class="btn btn-primary w-100">Ajouter au panier</button>
+							<a href="{{ path ('app_cart_add', {id : product.id})}}" class="btn btn-primary w-100">Ajouter au panier</a>
 						</div>
+						
 
 					</div>
 				</div>

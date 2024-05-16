@@ -69,8 +69,11 @@
 									<i data-feather="user"></i>
 								</a>
 							{% endif %}
-							<a href="">
+							<a href="{{ path('app_cart')}}">
 								<i data-feather="shopping-cart"></i>
+							</a>
+							<a href="{{ path('app_cart_delete')}}">
+								<span>X</span>
 							</a>
 						</div>
 					</div>
@@ -78,12 +81,12 @@
 			</nav>
 		</header>
 		{# <main class="min-vh-100 d-flex flex-column"> #}
-		<div class="flex-grow-1">
+		<div class="flex-grow-1" style="position:relative">
 
 			{% for label, messages in app.flashes %}
 				{% for message in messages %}
-					<div class="container my-4 ">
-						<div class="alert alert-{{ label }}">
+					<div class="container my-4 mx-auto flash_message" style="position:absolute">
+						<div class="container alert alert-{{ label }}">
 							{{ message }}
 						</div>
 					</div>

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+	<div class="container my-4">
+
+		<h1 class="my-4">Mon panier :</h1>
+		 {% if cart is defined and cart is not empty %}
+            {{ dump(cart) }}
+        {% else %}
+            <p>Votre panier est vide.</p>
+        {% endif %}
+
+		<div class="row">
+			<div class="col-md-8">Liste de mes produits</div>
+			<div class="col-md-4">Récap</div>
+		</div>
+
+	</div>
+{% endblock %}

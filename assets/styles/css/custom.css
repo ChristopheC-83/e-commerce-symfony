@@ -87,3 +87,8 @@
 .bg-light-blue{
     background: #f4f7ff;
 }
+
+.flash_message{
+    left: 50%;
+    transform: translateX(-50%);
+}
