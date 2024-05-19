@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+
+	<div class="container">
+
+		<h1 class="my-4 ">Espace Membre</h1>
+
+		<div class="row">
+			<div class="col-md-3">{% include 'account/_menu.html.twig' %}</div>
+			<div class="col-md-9">
+				<h5 class="mb-4 ">Mes adresses</h5>
+				formulaire d'ajout d'une adresse
+
+
+				{# Pour styliser élt par elt, on explose le form avec start et end #}
+				{{ form_start(addressForm) }}
+				<div class="row">
+					<div class="col-md-6">
+						{{form_row(addressForm.firstname)}}
+						{{form_row(addressForm.lastname)}}
+						{{form_row(addressForm.phone)}}
+					</div>
+					<div class="col-md-6">
+						{{form_row(addressForm.address)}}
+						{{form_row(addressForm.postal)}}
+						{{form_row(addressForm.city)}}
+						{{form_row(addressForm.country)}}
+
+					</div>
+                    
+						<div class="col-12">{{form_row(addressForm.submit)}}</div>
+				</div>
+				{{ form_end(addressForm) }}
+			</div>
+		</div>
+	</div>
+</div>{% endblock %}
