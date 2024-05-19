@@ -6,15 +6,45 @@
 	<div class="container my-4">
 
 		<h1 class="my-4">Mon panier :</h1>
-		 {% if cart is defined and cart is not empty %}
-            {{ dump(cart) }}
-        {% else %}
-            <p>Votre panier est vide.</p>
-        {% endif %}
+
 
 		<div class="row">
-			<div class="col-md-8">Liste de mes produits</div>
-			<div class="col-md-4">Récap</div>
+			<div class="col-md-8">
+
+
+				{% if cart is defined and cart is not empty %}
+					{% for product in cart %}
+						<div class="row my-2">
+							<div class="col-md-2">
+								<img src="/uploads/{{product.object.illustration}}" alt="{{product.object.name}}" class="img-fluid">
+							</div>
+							<div class="col-md-5">
+								<b>{{product.object.name}}</b>
+								<span class="d-block small">Prix unitaire TTC :
+									{{product.object.pricewt|price}}</span>
+							</div>
+							<div class="col-md-3 text-right">
+								<a href="{{ path ('app_cart_decrease', {id : product.object.id})}}"  class="badge text-bg-dark p-2 text-decoration-none">-</a>
+								<span class="badge text-bg-dark p-2 px-3">
+									x
+									{{product.qtt}}
+								</span>
+								<a href="{{ path ('app_cart_add', {id : product.object.id})}}" class="badge text-bg-dark p-2 text-decoration-none">+</a>
+
+							</div>
+							<div class="col-md-2 text-right fw-bold">{{(product.qtt*product.object.pricewt)|price}}</div>
+							{# {{ dump(product) }} #}
+						</div>
+					{% endfor %}
+					<a href="{{ path('app_cart_remove')  }}"><button class="btn btn-danger mt-5">Vider le panier</button></a>
+				{% else %}
+					<p>Votre panier est vide.</p>
+				{% endif %}
+			</div>
+
+			<div class="col-md-4">
+				<h3>Récap</h3>
+			</div>
 		</div>
 
 	</div>
