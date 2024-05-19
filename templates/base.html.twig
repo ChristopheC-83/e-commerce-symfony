@@ -71,10 +71,15 @@
 							{% endif %}
 							<a href="{{ path('app_cart')}}">
 								<i data-feather="shopping-cart"></i>
+								{% if fullCartQtt > 0 %}
+								<span class="badge text-bg-light">{{ fullCartQtt }}</span>
+								
+							{% endif %}
 							</a>
-							<a href="{{ path('app_cart_delete')}}">
+							{#kiki s'amuse
+							 <a href="{{ path('app_cart_delete')}}">
 								<span>X</span>
-							</a>
+							</a> #}
 						</div>
 					</div>
 				</div>
