@@ -31,14 +31,6 @@ class RegisterController extends AbstractController
            
         }
 
-
-
-        // ->DB 
-
-
-        // -> notification
-
-
         return $this->render('register/index.html.twig', [
             'registerForm' => $form->createView(),
         ]);
