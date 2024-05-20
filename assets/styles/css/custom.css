@@ -92,3 +92,16 @@
     left: 50%;
     transform: translateX(-50%);
 }
+
+#order_addresses .form-check,
+#order_carriers .form-check{
+background: #e8f1ff;
+padding: 10px 40px;
+margin: 20px 0 0;
+
+}
+
+.small_container{
+    max-width: 800px;
+    margin: 0 auto;
+}

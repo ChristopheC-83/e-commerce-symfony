@@ -2,7 +2,7 @@
 
 namespace App\Controller\Account;
 
-
+use App\Classe\Cart;
 use App\Entity\Address;
 use App\Form\AddressUserType;
 use App\Repository\AddressRepository;
@@ -51,7 +51,7 @@ class AddressController extends AbstractController
     // Ajout d'une adresse si pas d'id
     // Modification d'une adresse si id
     #[Route('/compte/adresse/ajouter/{id}', name: 'app_account_address_form', defaults: ['id' => null])]
-    public function form(Request $request, $id, AddressRepository $addressRepository): Response
+    public function form(Request $request, $id, AddressRepository $addressRepository, Cart $cart): Response
     {
 
         if ($id) {
@@ -75,6 +75,9 @@ class AddressController extends AbstractController
             $this->entityManager->flush();
             $this->addFlash('success', 'Votre adresse a bien été sauvegardée ! ');
 
+            if ($cart->fullQtt() > 0) {
+                return $this->redirectToRoute('app_order');
+            }
             return $this->redirectToRoute('app_account_addresses');
         }
 
