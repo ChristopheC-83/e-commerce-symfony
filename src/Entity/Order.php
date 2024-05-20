@@ -21,6 +21,9 @@ class Order
     private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\Column(length: 255)]
+    private ?int $state = null;
+
+    #[ORM\Column(length: 255)]
     private ?string $carrierName = null;
 
     #[ORM\Column]
@@ -32,13 +35,42 @@ class Order
     /**
      * @var Collection<int, OrderDetail>
      */
-    #[ORM\OneToMany(targetEntity: OrderDetail::class, mappedBy: 'myOrder')]
+    #[ORM\OneToMany(targetEntity: OrderDetail::class, mappedBy: 'myOrder', cascade: ['persist'])]
     private Collection $orderDetails;
+
+    #[ORM\ManyToOne(inversedBy: 'orders')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();
     }
+
+    public function getTotalWt()
+    {
+        $totalTtc = 0;
+        $products = $this->getOrderDetails();
+        foreach ($products as $product) {
+            $coeff = 1 + ($product->getProductTva() / 100);
+            $totalTtc += ($product->getProductPrice() * $coeff) * $product->getProductQuantity();
+        }
+        return $totalTtc + $this->getCarrierPrice();
+    }
+
+    public function getTotalTva()
+    {
+        $totalTva = 0;
+        $products = $this->getOrderDetails();
+        foreach ($products as $product) {
+            $coeff = $product->getProductTva() / 100;
+            $totalTva += $product->getProductPrice() * $coeff;
+        }
+        return $totalTva;
+
+    }
+   
+
 
     public function getId(): ?int
     {
@@ -53,6 +85,21 @@ class Order
     public function setCreatedAt(\DateTimeInterface $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    // 1 : en attente de paiement
+    // 2 : paiement accepté
+    // 3 : expédiée
+
+    public function getState(): ?int
+    {
+        return $this->state;
+    }
+    public function setState(int $state): static
+    {
+        $this->state = $state;
 
         return $this;
     }
@@ -119,6 +166,18 @@ class Order
                 $orderDetail->setMyOrder(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
