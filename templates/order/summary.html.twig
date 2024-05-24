@@ -90,7 +90,7 @@
 					<span class="fw-bold">Prix Total TTC :</span>
 					<b>{{ (totalWt + choices.carriers.price)|price }}</b>
 				</p>
-				<a href="{{path('app_order')}}" class="btn btn-success w-100 mt-3">Valider et Payer</a>
+				<a href="{{path('app_payment', {'id_order': order.id } ) }}" class="btn btn-success w-100 mt-3">Valider et Payer</a>
 			</div>
 		</div>
 	</div>
