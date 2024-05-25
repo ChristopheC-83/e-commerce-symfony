@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\OrderRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,23 +13,23 @@ use Symfony\Component\Routing\Attribute\Route;
 class PaymentController extends AbstractController
 {
     #[Route('/commande/paiement/{id_order}', name: 'app_payment')]
-    public function index($id_order, OrderRepository $orderRepository): Response
+    public function index($id_order, OrderRepository $orderRepository, EntityManagerInterface $entityManager): Response
     {
 
 
         Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
-        
+
         $order = $orderRepository->findOneBy([
-            
+
             'id' => $id_order,
             'user' => $this->getUser(),
-            
+
         ]);
-        
+
         if (!$order) {
             return $this->redirectToRoute('app_home');
         }
-        
+
         $products_for_stripe = [];
 
         foreach ($order->getOrderDetails() as $product) {
@@ -67,11 +68,22 @@ class PaymentController extends AbstractController
             'line_items' => [$products_for_stripe],
             'mode' => 'payment',
             'success_url' => $_ENV['DOMAIN'] . '/success.html',
-            'cancel_url' => $_ENV['DOMAIN'] . '/cancel.html',
+            'cancel_url' => $_ENV['DOMAIN'] . '/mon-panier/annulation',
         ]);
 
+        $order->setStripeSessionID($checkout_session->id);
+        $entityManager->flush();
 
         return $this->redirect($checkout_session->url);
 
     }
+
+
+    #[Route('/commande/merci/{id_order}', name: 'app_payment_success')]
+    public function success($id_order, OrderRepository $orderRepository): Response
+    {
+
+
+    }
 }
+
