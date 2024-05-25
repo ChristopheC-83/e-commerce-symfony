@@ -1,7 +1,7 @@
 {% if field.value == 1 %}
-<span class="badge badge-secondary p-2">En attente de paiement</span>
+<span class="bg-primary p-2 rounded text-white">En attente de paiement</span>
 {% elseif field.value == 2 %}
-<span class="badge badge-success p-2">Cmde payée</span>
+<span class="bg-success p-2 rounded text-white">Cmde payée</span>
 {% elseif field.value == 3 %}
-<span class="badge badge-primary p-2">Cmde expédiée</span>
+<span class="bg-primary p-2 rounded text-white">Cmde expédiée</span>
 {% endif %}

@@ -39,7 +39,7 @@
 										Catégories
 									</p>
 									<ul class="dropdown-menu">
-							
+
 										{% for category in allCategories %}
 											<li>
 												<a class="dropdown-item" href="{{path('app_category', {'slug': category.slug})}}">
@@ -47,7 +47,7 @@
 												</a>
 											</li>
 										{% endfor %}
-										
+
 									</ul>
 								</div>
 
@@ -71,15 +71,15 @@
 							{% endif %}
 							<a href="{{ path('app_cart')}}">
 								<i data-feather="shopping-cart"></i>
-								{% if fullCartQtt > 0 %}
+								{# {% if fullCartQtt > 0 %} #}
 								<span class="badge text-bg-light">{{ fullCartQtt }}</span>
-								
-							{% endif %}
+								{# {% endif %} #}
+
 							</a>
 							{#kiki s'amuse
-							 <a href="{{ path('app_cart_delete')}}">
-								<span>X</span>
-							</a> #}
+														 <a href="{{ path('app_cart_delete')}}">
+															<span>X</span>
+														</a> #}
 						</div>
 					</div>
 				</div>
