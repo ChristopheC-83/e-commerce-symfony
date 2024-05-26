@@ -52,6 +52,14 @@
 					</p>
 					
 					<p class="d-flex justify-content-between">
+						<span class="fw-bold">Prix Total HT :</span>
+						<b>{{ total|price }}</b>
+					</p>
+					<p class="d-flex justify-content-between">
+						<span class="fw-bold"> Total TVA :</span>
+						<b>{{ totalTVA|price }}</b>
+					</p>
+					<p class="d-flex justify-content-between">
 						<span class="fw-bold">Prix Total TTC :</span>
 						<b>{{ totalWt|price }}</b>
 					</p>

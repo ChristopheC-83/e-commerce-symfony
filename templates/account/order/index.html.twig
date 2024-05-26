@@ -49,7 +49,7 @@
 								<th scope="col">PU HT</th>
 								<th scope="col">TVA</th>
 								<th scope="col">PU TTC</th>
-								<th scope="col">Total TTC</th>
+								<th scope="col" class="text-end">Total TTC</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -62,7 +62,7 @@
 									<td>{{product.productTva}}</td>
 									{% set coeff = 1 + (product.productTva / 100)  %}
 									<td>{{ (product.productPrice * coeff)|price }}</td>
-									<td>{{ ((product.productPrice * coeff) * product.productQuantity)|price }}</td>
+									<td class="text-end"> {{ ((product.productPrice * coeff) * product.productQuantity)|price }}</td>
 								</tr>
 							{% endfor %}
 							<tr>
@@ -72,35 +72,20 @@
 								<td></td>
 								<td></td>
 								<td></td>
-								<td>{{ order.carrierPrice|price}}</td>
+								<td class="text-end">{{ order.carrierPrice|price}}</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td><b>TOTAL TTC :</b></td>
+								<td></td>
+								<td class="text-end"><b>{{ order.totalWt|price}}</b></td>
 							</tr>
 						</tbody>
 					</table>
-					<div class="d-flex flex-column w-auto ms-auto">
-
-						<div class="d-flex justify-content-between w-100">
-							<p class="mx-3">
-								<b>TOTAL H.T. :</b>
-							</p>
-							<p>
-								{{(order.totalWt - order.totalTva)|price}}</p>
-						</div>
-						<div class="d-flex justify-content-between w-100">
-							<p class="mx-3">
-								<b>TOTAL TVA :</b>
-							</p>
-							<p>
-								{{order.totalTva|price}}</p>
-						</div>
-						<div class="d-flex justify-content-between w-100">
-							<p class="mx-3">
-								<b>TOTAL TTC :</b>
-							</p>
-							<p>
-								<b>{{order.totalWt|price}}</b>
-							</p>
-						</div>
-					</div>
+					
 				</div>
 
 			</div>
